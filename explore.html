@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>explore</title>
+    <style>
+        body{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: #75B9BF;
+            font-size: 17px;
+            margin: 0;
+            padding: 0;
+        }
+       .logo {
+            font-size:26px;
+            font-weight:700;
+            letter-spacing:1px; 
+            text-transform:uppercase; 
+            text-align:center; 
+            margin:auto; 
+            white-space:nowrap; 
+            padding-bottom:13px;
+            margin-top: 20px;
+        }
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #home-button{
+            
+            margin: 20px auto;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 17px;
+            background-color: #C74F29;
+            color: aliceblue;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            row-gap: 50px;
+            padding: 20px;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .detail-item {
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+
+        .detail-item h3 {
+            margin: 10px 0;
+        }
+
+        .detail-item img {
+            width: 100px;
+            height: auto;
+            margin: 10px 0;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .home{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="logo">NOVELNEXUS - Explore Books</h1>
+        </header>
+        <div class="home">
+            <button onclick="location.href = 'index.html';"id="home-button">Home</button>
+        </div>
+        <main>
+            <section id="book-list">
+              
+            </section>
+          </main>
+
+        <script src="script.js"></script>
+        <script>
+        function showBookDetails() {
+            const bookDetails = document.getElementById('book-list');
+            bookDetails.innerHTML = '';
+            const bookData = JSON.parse(localStorage.getItem('bookData')) || [];
+
+            bookData.forEach((book) => {
+            const detailItem = document.createElement('div');
+            detailItem.className = 'detail-item';
+
+             const title = document.createElement('h3');
+             title.textContent = book.title;
+             detailItem.appendChild(title);
+
+            const author = document.createElement('p');
+            author.textContent = `Author: ${book.author}`;
+            detailItem.appendChild(author);
+
+        const desc = document.createElement('p');
+        desc.textContent = `Description: ${book.desc}`;
+        detailItem.appendChild(desc);
+
+        const img = document.createElement('img');
+        img.src = book.imageLink;
+        img.style.width = '100px';
+        img.style.height = 'auto';
+        detailItem.appendChild(img);
+
+
+        bookDetails.appendChild(detailItem);
+    });
+   
+}
+document.addEventListener('DOMContentLoaded', showBookDetails);
+
+        </script>
+    </body>

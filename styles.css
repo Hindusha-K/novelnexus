@@ -1,0 +1,52 @@
+.playwrite-de-grund,body {
+    font-family: "Playwrite DE Grund", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+.calligraffitti-regular ,h1{
+    font-family: "Calligraffitti", cursive;
+    font-weight: 600;
+    font-style: solid;   
+  }
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+.btn{
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    column-gap: 20px;
+    
+}
+BUTTON{
+    color: black;
+    border: 0;
+    background-color: #006078;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.0rem;
+    cursor: pointer;
+}
+body{
+  margin: 0;
+  background:radial-gradient(circle,#282D40,#0A162C);
+ 
+  color: #EDF6F9;
+}
+
+.btn button:hover {
+  opacity: 0.8;
+}
+#book-details {
+  display: none;
+}

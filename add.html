@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add form</title>
+    <link rel="stylesheet" href="form.css">
+    </head>
+    <body>
+        <div class="main">
+            <h2>ADD BOOK</h2>
+        <form id="add-book-form">
+            <label for="title">
+                  Title:
+            </label>
+            <input type="text" 
+                   id="title" 
+                   name="title" 
+                   required>
+
+            <label for="author">
+                  Author:
+            </label>
+            <input type="author"
+                   id="author" 
+                   name="author"
+                   required>
+
+             <label for="desc">
+                    Description:
+              </label>
+              <input type="desc"
+                     id="desc" 
+                     name="desc"
+                     required> 
+                <label for="image-link">Image Link:</label>
+                <input type="text" id="image-link" name="image-link" required><br><br>
+
+            <button type="submit">
+                        Submit
+            </button> 
+      </form>
+    </div>
+    <script>
+        let bookData = JSON.parse(localStorage.getItem('bookData')) || [];
+
+        function generateUniqueId() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function saveBookData() {
+            localStorage.setItem('bookData', JSON.stringify(bookData));
+        }
+
+        document.getElementById('add-book-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = generateUniqueId();
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const desc = document.getElementById('desc').value;
+            const imageLink = document.getElementById('image-link').value;
+
+            const newBook = { id,title, author, desc, imageLink };
+            bookData.push(newBook);
+            saveBookData();
+
+            alert('Book was added successfully!');
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000);  
+        });
+
+    </script>
+    
+    </body>

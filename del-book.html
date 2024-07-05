@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="form.css">
+    </head>
+    <body>
+        <div class="main">
+            <h2>Delete Book</h2>
+            <form id="delete-form">
+                <input type="hidden" id="book-id" name="book-id">
+                <label for="title">Title:</label>
+                <input id="title" type="text" name="title">
+                <button type="delete">Delete</button>
+            </form>
+        </div>
+        <script>
+             document.getElementById('delete-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            let bookData = JSON.parse(localStorage.getItem('bookData')) || [];
+
+            const bookIndex = bookData.findIndex(book => book.title === title);
+
+            if (bookIndex !== -1) {
+                bookData.splice(bookIndex, 1);
+                localStorage.setItem('bookData', JSON.stringify(bookData));
+                alert('Book deleted successfully!');
+            } else {
+                alert('Book not found!');
+            }
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000);  
+        });
+        </script>

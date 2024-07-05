@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="form.css">
+    </head>
+    <body>
+        <div class="main">
+            <h2>Update Book</h2>
+            <form id="update-form">
+                <input type="hidden" id="book-id" name="book-id">
+                <label for="title">Title:</label>
+                <input id="title" type="text" name="title">
+
+                <label for="author">Author:</label>
+                <input id="author" type="text" name="author">
+
+                <label for="desc">Description:</label>
+                <input id="desc" type="text" name="desc">
+
+                <label for="image-link">Image Link:</label>
+                <input type="text" id="image-link" name="image-link"><br><br>
+
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        <script>
+             document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const bookId = urlParams.get('id');
+                console.log(bookId);
+            
+            const bookData = JSON.parse(localStorage.getItem('bookData')) || [];
+            console.log(bookId);
+            const book = bookData.find(b => b.id === parseInt(bookId));
+            if (book) {
+                console.log(book.id);
+                document.getElementById('book-id').value = book.id;
+                document.getElementById('title').value = book.title;
+                document.getElementById('author').value = book.author;
+                document.getElementById('desc').value = book.desc;
+                document.getElementById('image-link').value = book.imageLink;
+            }
+            else {
+                alert('Book not found');
+                window.location.href = 'index.html';
+            }
+            document.getElementById('update-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                console.log('bookId');
+                const updatedBook = {
+                    id: document.getElementById('book-id').value,
+                    title: document.getElementById('title').value,
+                    author: document.getElementById('author').value,
+                    desc: document.getElementById('desc').value,
+                    imageLink: document.getElementById('image-link').value
+                };
+                const bookData = JSON.parse(localStorage.getItem('bookData')) || [];
+                const bookIndex = bookData.findIndex(b => b.id === updatedBook.id);
+                if (bookIndex !== -1) {
+                    bookData[bookIndex] = updatedBook;
+                    localStorage.setItem('bookData', JSON.stringify(bookData));
+                    alert('Book updated successfully!');
+                    console.log('bookId');
+                    window.location.href = 'index.html'; // Redirect to the home page
+                }
+                else {
+                alert('Book not found');
+                return;
+            }
+            });
+        });
+       
+
+        </script>
+    </body>
+</html>
